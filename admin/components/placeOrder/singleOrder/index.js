@@ -177,7 +177,7 @@ const OrderDetails = ({ onClick, item }) => {
                           className="text-sm sm:text-lg md:text-xl text-title font-mono"
                           id={`item_0${++i}`}
                         >
-                          {item?.title}
+                          {item?.title}  {item?.option && `(${item?.option[0]?.value}, ${item?.option[1]?.value})`}
                         </h2>
                       </div>
                       <div className="flex justify-between w-7/12">

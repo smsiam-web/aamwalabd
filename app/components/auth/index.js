@@ -175,7 +175,7 @@ const Auth = () => {
             {/* <Package2 className="h-10 w-10 text-background" /> */}
             <div className="pl-5 text-white text-xl font-bold pt-3 flex gap-2 items-center justify-center">
               <FiBox size={40} />
-              <h1 className=" text-white text-[24px] font-bold">PORON.</h1>
+              <h1 className=" text-white text-[24px] font-bold">আম ওয়ালা.</h1>
             </div>
           </div>
           <div className="flex justify-center items-center">

@@ -230,34 +230,38 @@ export const invoiceGenerate = (item) => {
     item_06_total_price = "";
 
   item.items.map((e, i) => {
+    const opt = Array.isArray(e?.option)
+      ? e.option.map((o) => `${o.value || o.value}`).join(", ")
+      : "";
+    const title = opt ? `${e.title} (${opt})` : e.title;
     i++;
     if (i === 1) {
-      item_01 = e.title || "";
+      item_01 = title || "";
       item_01_quantity = `${e.quantity}`;
       item_01_price = `${e.price}`;
       item_01_total_price = `${e.line_total}/-`;
     } else if (i === 2) {
-      item_02 = e.title || "";
+      item_02 = title || "";
       item_02_quantity = `${e.quantity}`;
       item_02_price = `${e.price}`;
       item_02_total_price = `${e.line_total}/-`;
     } else if (i === 3) {
-      item_03 = e.title || "";
+      item_03 = title || "";
       item_03_quantity = `${e.quantity}`;
       item_03_price = `${e.price}`;
       item_03_total_price = `${e.line_total}/-`;
     } else if (i === 4) {
-      item_04 = e.title || "";
+      item_04 = title || "";
       item_04_quantity = `${e.quantity}`;
       item_04_price = `${e.price}`;
       item_04_total_price = `${e.line_total}/-`;
     } else if (i === 5) {
-      item_05 = e.title || "";
+      item_05 = title || "";
       item_05_quantity = `${e.quantity}`;
       item_05_price = `${e.price}`;
       item_05_total_price = `${e.line_total}/-`;
     } else if (i === 6) {
-      item_06 = e.title || "";
+      item_06 = title || "";
       item_06_quantity = `${e.quantity}`;
       item_06_price = `${e.price}`;
       item_06_total_price = `${e.line_total}/-`;
@@ -326,9 +330,8 @@ export const invoiceGenerate = (item) => {
   // 🔥 Enable PDF auto-print (adds OpenAction in the PDF)
   doc.autoPrint();
 
-  const fileName = `${
-    item?.orderID || item?.fulfillment?.consignment_id || "order"
-  }.pdf`;
+  const fileName = `${item?.orderID || item?.fulfillment?.consignment_id || "order"
+    }.pdf`;
 
   // Make a Blob + URL
   const blob = doc.output("blob");
@@ -367,8 +370,7 @@ export const invoiceGenerate = (item) => {
   a.download = fileName;
   a.click();
 
-  setTimeout(() => URL.revokeObjectURL(url), 60000); 
-
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
 };
 function barcodeDataURL(value, options = {}) {
   const canvas = document.createElement("canvas");
@@ -437,6 +439,9 @@ export const generateStick = (item) => {
   const maxRows = Math.max(0, Math.floor(availableHeight / rowHeight));
   let renderedBody = bodyRows.slice(0, maxRows);
   const hiddenCount = bodyRows.length - renderedBody.length;
+  const title = process.env.APP_TITLE || "";
+  const address = process.env.SENDER_ADDRESS || "";
+  const hotline = process.env.SENDER_HOTLINE || "";
 
   if (hiddenCount > 0) {
     // শেষ লাইনে “+N more” দেখান
@@ -512,11 +517,15 @@ export const generateStick = (item) => {
     const x = (pageWidth - textWidth) / 2;
     doc.text(text, x, y);
   };
-  centerText(`${item?.fulfillment?.courier}(#${item?.fulfillment?.consignment_id})`, 74, 30)
-  centerText(`Address: Savar, Dhaka-1216`, 259, 28);
-  centerText(`Hotline: +88 01773-043533`, 247, 28);
+  centerText(
+    `${item?.fulfillment?.courier}(#${item?.fulfillment?.consignment_id})`,
+    74,
+    30
+  );
+  centerText(`Address: ${address}`, 259, 28);
+  centerText(`Hotline: +88 ${hotline}`, 247, 28);
   doc.setFont(undefined, "bold");
-  centerText("PORON", 235, 36); // centered version
+  centerText(`${title}`, 235, 36); // centered version
   centerText(`HOME DELIVERY`, 205, 40);
   centerText(`COD: ${item?.totals?.grand}/-`, 218, 40);
 
@@ -525,16 +534,15 @@ export const generateStick = (item) => {
   doc.setFontSize(34).text("Sender:", 15, 226);
 
   // Top brand title (can also be centered if you prefer)
-  centerText("PORON", 25, 55);
+  centerText(`${title}`, 25, 55);
 
   centerText("Thanks for being with us.", 273, 34);
 
   // 🔥 Enable PDF auto-print (adds OpenAction in the PDF)
   doc.autoPrint();
 
-  const fileName = `${
-    item?.orderID || item?.fulfillment?.consignment_id || "order"
-  }.pdf`;
+  const fileName = `${item?.orderID || item?.fulfillment?.consignment_id || "order"
+    }.pdf`;
 
   // Make a Blob + URL
   const blob = doc.output("blob");

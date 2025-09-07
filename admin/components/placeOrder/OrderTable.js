@@ -67,15 +67,7 @@ const OrderTable = () => {
     setFilterOrder(item);
     //   console.log(item);
   };
-  const { inputRef } = useBarcode({
-    value: ID,
-    options: {
-      background: "#FFFFFF",
-      displayValue: false,
-      width: 3,
-      height: 80,
-    },
-  });
+
   // Change Status from print Action and check print Status
   const stickerStatus = async (item) => {
     await setID(item?.courier?.consignment_id);
@@ -86,7 +78,7 @@ const OrderTable = () => {
     item.status === "processing" && generateStick(item);
     setID(null);
   };
-  console.log(ID);
+
   const deleteItem = async (item) => {
     setFilterOrder(item);
     toggleOpen();
@@ -226,9 +218,7 @@ const OrderTable = () => {
         </div>
       </Modal>
       <div className="grid gap-4 w-full overflow-hidden ">
-        <div className="hidden">
-          <img ref={inputRef} alt="ok" />
-        </div>
+        
         <div className="w-full overflow-x-scroll rounded-md relative">
           {/* order table  */}
           {!orders.length ? (
@@ -337,30 +327,30 @@ const OrderTable = () => {
                               <span className="font-serif">
                                 <span
                                   className={`${
-                                    item.status.toLowerCase() === "pending" &&
+                                    item?.status?.toLowerCase() === "pending" &&
                                     "text-gray-700 bg-gray-200"
                                   } ${
-                                    item.status.toLowerCase() === "hold" &&
+                                    item?.status?.toLowerCase() === "hold" &&
                                     "text-gray-700 bg-gray-200"
                                   } ${
-                                    item.status.toLowerCase() ===
+                                    item?.status?.toLowerCase() ===
                                       "processing" &&
                                     "text-yellow-500 bg-yellow-100"
                                   } ${
-                                    item.status.toLowerCase() === "shipped" &&
+                                    item?.status?.toLowerCase() === "shipped" &&
                                     "text-indigo-500 bg-indigo-100"
                                   } ${
-                                    item.status.toLowerCase() === "delivered" &&
+                                    item?.status?.toLowerCase() === "delivered" &&
                                     "text-green-500 bg-green-200"
                                   } ${
-                                    item.status.toLowerCase() === "returned" &&
+                                    item?.status?.toLowerCase() === "returned" &&
                                     "bg-teal-100 text-teal-500"
                                   } ${
-                                    item.status.toLowerCase() === "cancelled" &&
+                                    item?.status?.toLowerCase() === "cancelled" &&
                                     "bg-red-100 text-red-500"
                                   } inline-flex px-2 text-xs capitalize font-medium leading-5 rounded-full`}
                                 >
-                                  {item.status}
+                                  {item?.status}
                                 </span>
                               </span>
                             </td>

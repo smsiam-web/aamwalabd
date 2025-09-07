@@ -67,6 +67,9 @@ function generateBulkPrintStickers(invoiceArray) {
     const maxRows = Math.max(0, Math.floor(availableHeight / rowHeight));
     let renderedBody = bodyRows.slice(0, maxRows);
     const hiddenCount = bodyRows.length - renderedBody.length;
+    const title = process.env.APP_TITLE || "";
+    const address = process.env.SENDER_ADDRESS || "";
+    const hotline = process.env.SENDER_HOTLINE || "";
 
     if (hiddenCount > 0) {
       // শেষ লাইনে “+N more” দেখান
@@ -136,16 +139,6 @@ function generateBulkPrintStickers(invoiceArray) {
       align: "left",
     });
 
-    // ✅ Center the consignment ID text
-    const consignmentId = `${item?.fulfillment?.consignment_id}`;
-    doc.setFontSize(34);
-    const textWidth = doc.getTextWidth(consignmentId);
-    const textX = (pageWidth - textWidth) / 2;
-    doc.text(consignmentId, textX, 74);
-
-    // doc.setFontSize(26).text(`(WGT: ${item?.weight}kg)`, 6, 74);
-
-    // ✅ Center "Jannat Fashion"
     // const pageWidth = doc.internal.pageSize.getWidth();
     const centerText = (text, y, fontSize = 36) => {
       doc.setFontSize(fontSize);
@@ -154,10 +147,10 @@ function generateBulkPrintStickers(invoiceArray) {
       doc.text(text, x, y);
     };
     centerText(`${item?.fulfillment?.courier}(#${item?.fulfillment?.consignment_id})`, 74, 30)
-    centerText(`Address: Savar, Dhaka-1216`, 259, 28);
-    centerText(`Hotline: +88 01773-043533`, 247, 28);
+    centerText(`Address: ${address}`, 259, 28);
+    centerText(`Hotline: +88 ${hotline}`, 247, 28);
     doc.setFont(undefined, "bold");
-    centerText("PORON", 235, 36); // centered version
+    centerText(`${title}`, 235, 36); // centered version
     centerText(`HOME DELIVERY`, 205, 40);
     centerText(`COD: ${item?.totals?.grand}/-`, 218, 40);
 
@@ -166,7 +159,7 @@ function generateBulkPrintStickers(invoiceArray) {
     doc.setFontSize(34).text("Sender:", 15, 226);
 
     // Top brand title (can also be centered if you prefer)
-    centerText("PORON", 25, 55);
+    centerText(`${title}`, 25, 55);
 
     centerText("Thanks for being with us.", 273, 34);
     // Add a new page unless it's the last data

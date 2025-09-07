@@ -28,7 +28,8 @@ import { IoCall } from "react-icons/io5";
 import BarcodeComponent from "@/admin/utils/BarcodeImage";
 
 const SearchBy = ({ onClick }) => {
-  const [currentValue, setCurrentValue] = useState("RA014");
+  const searchPrefix = process.env.SEARCH_PREFIX || "";
+  const [currentValue, setCurrentValue] = useState("JF011");
   const [filterOrder, setFilterOrder] = useState(null);
   const [orders, setOrders] = useState(useSelector(selectOrder));
   const [barcodeImage, setBarcodeImage] = useState("");
@@ -45,7 +46,7 @@ const SearchBy = ({ onClick }) => {
   }, [opened]);
 
   const resetFilter = () => {
-    setCurrentValue("PR011");
+    setCurrentValue("JF011");
     setFilterOrder(null);
     setBarcodeImage("");
   };
@@ -171,7 +172,7 @@ const SearchBy = ({ onClick }) => {
 
   useEffect(() => {
     const value = currentValue?.toUpperCase();
-    if (value?.split("0")[0] === "PR" && value.length === 9) {
+    if (value?.split("0")[0] === "JF" && value.length === 9) {
       filter(value);
     }
   }, [currentValue]);

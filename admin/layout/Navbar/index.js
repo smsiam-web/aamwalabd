@@ -5,6 +5,7 @@ import NavUser from "@/admin/components/NavUser";
 import Link from "next/link";
 
 function Navbar({ setSidebarActive }) {
+
   return (
     <div className={`${styles.container} fixed shadow-sm`}>
       <div className={styles.wrapper}>

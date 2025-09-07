@@ -10,16 +10,23 @@ const nextConfig = {
   // },
 
   env: {
-    STEADFAST_API_KEY: "jlrucxcrscnbuk3cnp9hm1uq4lhwuoyz ",
+    APP_TITLE: "Jannat Fashion",
+    INVOICE_PREFIX: "JF0",
+    SENDER_HOTLINE: "09647-323700",
+    SENDER_ADDRESS: "Nawhata, Paba, Rajshahi.",
+
     STEADFAST_BASE_URL: "https://portal.packzy.com/api/v1",
-    STEADFAST_SECRET_KEY: "sgorfaoc9gcx8cshnn337qfa ",
-    FIREBASE_API_KEY: "AIzaSyCoUqj3PS5WS15C-bxiCjUi2mNwLjeHdjk",
-    FIREBASE_AUTH_DOMAIN: "poron-5e3f7.firebaseapp.com",
-    FIREBASE_PROJECT_ID: "poron-5e3f7",
-    FIREBASE_STORAGE_BUCKET: "poron-5e3f7.firebasestorage.app",
-    FIREBASE_MESSAGING_SENDER_ID: "931161984423",
-    FIREBASE_APP_ID: "1:931161984423:web:d0af5006edf08592737a82",
-    FIREBASE_MEASUREMENT_ID: "G-G73985K5BK",
+    STEADFAST_API_KEY: "jqy9obuy2ctu0z2l7yzqhfj8pcgx1aj5",
+    STEADFAST_SECRET_KEY: "7igbcethm60vjxslj4kj8bdl",
+
+    FIREBASE_API_KEY: "AIzaSyCwlmCftGAJuPHWJosjrHRhU84iSiudjfM",
+    FIREBASE_AUTH_DOMAIN: "rajshahiraamwala-8b7bf.firebaseapp.com",
+    FIREBASE_PROJECT_ID: "rajshahiraamwala-8b7bf",
+    FIREBASE_STORAGE_BUCKET: "rajshahiraamwala-8b7bf.appspot.com",
+    FIREBASE_MESSAGING_SENDER_ID: "38548299757",
+    FIREBASE_APP_ID: "1:38548299757:web:ea6e60638def1036a511e4",
+    FIREBASE_MEASUREMENT_ID: "G-2BZJP3PX28",
+
     PATHAO_CLIENT_ID: "YqaQkRGdnj",
     PATHAO_CLIENT_SECRET: "BlsLo8rmc621S6mabzxVs2Aq1TwaXa39E8s44bxD",
     PATHAO_BASE_URL: "https://api-hermes.pathao.com",

@@ -91,7 +91,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* Open Graph */}
         <meta property="og:locale" content="bn_BD" key="og:locale" />
         <meta property="og:type" content="website" key="og:type" />
-        <meta property="og:site_name" content="Poron" key="og:site_name" />
+        <meta property="og:site_name" content="Jannat Fashion" key="og:site_name" />
         <meta property="og:title" content={pageTitle} key="og:title" />
         <meta
           property="og:description"

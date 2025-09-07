@@ -86,6 +86,7 @@ const AddOrder = ({ onClick }) => {
     setLoading(true);
     const normalized = normalizeOrder(values);
     await orderValidationSchemaCOD.validate(normalized, { abortEarly: false });
+        const prefix = process.env.INVOICE_PREFIX || "";
 
     const counterRef = db.collection("counters").doc("JFOrderCounter");
 
@@ -102,7 +103,7 @@ const AddOrder = ({ onClick }) => {
       }
     })
       .then(async (newOrderId) => {
-        const orderID = `PR0${newOrderId}`;
+        const orderID = `${prefix}${newOrderId}`;
         const courierSel = String(
           normalized?.fulfillment?.courier || "Pathao"
         ).toLowerCase();

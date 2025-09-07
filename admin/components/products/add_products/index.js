@@ -41,7 +41,7 @@ const placeProductHandler = async (values) => {
     });
 
     // navigate after successful write
-    router.push(`/products/id=?${docId}`);
+    router.push(`/products/id=${docId}`);
   } catch (err) {
     console.error("placeProductHandler error:", err);
     notifications.show({

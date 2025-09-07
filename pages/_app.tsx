@@ -91,7 +91,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* Open Graph */}
         <meta property="og:locale" content="bn_BD" key="og:locale" />
         <meta property="og:type" content="website" key="og:type" />
-        <meta property="og:site_name" content="Jannat Fashion" key="og:site_name" />
+        <meta property="og:site_name" content={title} key="og:site_name" />
         <meta property="og:title" content={pageTitle} key="og:title" />
         <meta
           property="og:description"
@@ -108,7 +108,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image:height" content="630" key="og:image:height" />
         <meta
           property="og:image:alt"
-          content="AamWala – E-commerce"
+          content={`${title} - E-commerce`}
           key="og:image:alt"
         />
 

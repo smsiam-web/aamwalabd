@@ -666,7 +666,7 @@ const AddressFields = ({ prefix }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div className="col-span-1">
         <span>Street</span>
-        <FormInput name={`${prefix}.street`} placeholder="Street, house" />
+        <AppTextArea name={`${prefix}.street`} placeholder="Street, house" />
       </div>
       <div className="col-span-1">
         <span>City</span>

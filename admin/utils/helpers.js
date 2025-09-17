@@ -457,7 +457,8 @@ export const generateStick = (item) => {
 
       // 🔥 গ্লোবাল সেল স্টাইল
       styles: {
-        fontSize: 14,
+        fontSize: 22,
+        fontStyle: "bold",
         cellPadding: 2,
         textColor: [0, 0, 0], // টেক্সট কালো
         lineColor: [0, 0, 0], // সেলের বর্ডার কালো
@@ -475,9 +476,7 @@ export const generateStick = (item) => {
       columnStyles: {
         0: { cellWidth: 10, halign: "center" }, // #
         1: { cellWidth: "auto" }, // Item
-        2: { cellWidth: 16, halign: "center" }, // Qty
-        3: { cellWidth: 26, halign: "right" }, // Price
-        4: { cellWidth: 30, halign: "right" }, // Total
+        2: { cellWidth: 16, halign: "right" }, // Qty
       },
 
       // (ঐচ্ছিক) একদম নিশ্চিত করতে:
@@ -489,7 +488,7 @@ export const generateStick = (item) => {
     });
   } else {
     // কোন আইটেম না থাকলে ছোটো একটা নোট
-    doc.setFontSize(14);
+    doc.setFontSize(22);
     doc.text("No items", 16, startY + 6);
   }
 

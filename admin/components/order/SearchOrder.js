@@ -26,7 +26,7 @@ import { updateBulkOrder } from "@/app/redux/slices/bulkSlice";
 import { selectAllOrder, updateAllOrder } from "@/app/redux/slices/allOrder";
 
 const SearchOrder = ({ onClick }) => {
-  const [currentValue, setCurrentValue] = useState("RA014");
+  const [currentValue, setCurrentValue] = useState("JF010");
   const [filterOrder, setFilterOrder] = useState(null);
   const [orders, setOrders] = useState(useSelector(selectAllOrder));
   const [order, setOrder] = useState(useSelector(selectOrder));
@@ -94,7 +94,7 @@ const SearchOrder = ({ onClick }) => {
 
   useEffect(() => {
     if (!!opened) return;
-    setCurrentValue("PR011");
+    setCurrentValue("JF010");
     setFilterOrder(null);
   }, [opened]);
   useEffect(() => {

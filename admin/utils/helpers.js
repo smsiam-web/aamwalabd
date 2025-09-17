@@ -422,15 +422,15 @@ export const generateStick = (item) => {
       : "";
     const title = opt ? `${it.title} (${opt})` : it.title;
     const qty = Number(it?.quantity || 0);
-    const price = Number(it?.price || 0);
-    const total = Number(it?.line_total ?? qty * price);
+    // const price = Number(it?.price || 0);
+    // const total = Number(it?.line_total ?? qty * price);
     // const title = String(it?.title || "");
     return [
       i + 1,
       title,
       qty > 0 ? `${qty} ${it?.unit || ""}`.trim() : "",
-      formatMoney(price),
-      formatMoney(total),
+      // formatMoney(price),
+      // formatMoney(total),
     ];
   });
 
@@ -458,12 +458,16 @@ export const generateStick = (item) => {
       // 🔥 গ্লোবাল সেল স্টাইল
       styles: {
         fontSize: 22,
+<<<<<<< HEAD
         fontStyle: "bold",
+=======
+>>>>>>> b666eee (update all)
         cellPadding: 2,
         textColor: [0, 0, 0], // টেক্সট কালো
         lineColor: [0, 0, 0], // সেলের বর্ডার কালো
         lineWidth: 0.2,
         fillColor: null, // কোন ব্যাকগ্রাউন্ড না
+        fontStyle: "bold",
       },
       bodyStyles: {
         textColor: [0, 0, 0], // বডি টেক্সট কালো
@@ -476,7 +480,13 @@ export const generateStick = (item) => {
       columnStyles: {
         0: { cellWidth: 10, halign: "center" }, // #
         1: { cellWidth: "auto" }, // Item
+<<<<<<< HEAD
         2: { cellWidth: 16, halign: "right" }, // Qty
+=======
+        2: { cellWidth: 26, halign: "center" }, // Qty
+        // 3: { cellWidth: 26, halign: "right" }, // Price
+        // 4: { cellWidth: 30, halign: "right" }, // Total
+>>>>>>> b666eee (update all)
       },
 
       // (ঐচ্ছিক) একদম নিশ্চিত করতে:
@@ -489,6 +499,10 @@ export const generateStick = (item) => {
   } else {
     // কোন আইটেম না থাকলে ছোটো একটা নোট
     doc.setFontSize(22);
+<<<<<<< HEAD
+=======
+    doc.setFont(undefined, "bold");
+>>>>>>> b666eee (update all)
     doc.text("No items", 16, startY + 6);
   }
 

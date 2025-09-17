@@ -29,7 +29,7 @@ import BarcodeComponent from "@/admin/utils/BarcodeImage";
 
 const SearchBy = ({ onClick }) => {
   const searchPrefix = process.env.SEARCH_PREFIX || "";
-  const [currentValue, setCurrentValue] = useState("JF011");
+  const [currentValue, setCurrentValue] = useState("JF010");
   const [filterOrder, setFilterOrder] = useState(null);
   const [orders, setOrders] = useState(useSelector(selectOrder));
   const [barcodeImage, setBarcodeImage] = useState("");
@@ -46,7 +46,7 @@ const SearchBy = ({ onClick }) => {
   }, [opened]);
 
   const resetFilter = () => {
-    setCurrentValue("JF011");
+    setCurrentValue("JF010");
     setFilterOrder(null);
     setBarcodeImage("");
   };
@@ -496,7 +496,7 @@ const SearchBy = ({ onClick }) => {
                 onChange={(e) => onLimitChanged(e)}
               >
                 <option value="All">Order limits</option>
-                <option value="1">Today's orders</option>
+                <option value="1">Today orders</option>
                 <option value="7">Last 7 days orders</option>
                 <option value="10">Last 10 days orders</option>
                 <option value="15">Last 15 days orders</option>

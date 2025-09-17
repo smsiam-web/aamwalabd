@@ -4,8 +4,12 @@ import { numberWithCommas } from "@/app/utils/helpers";
 import { FiLayers, FiShoppingCart } from "react-icons/fi";
 import { ImCreditCard } from "react-icons/im";
 import { doubleDigit } from "@/admin/utils/helpers";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/app/redux/slices/authSlice";
 
 const PriceOverview = (item) => {
+  const user = useSelector(selectUser)
+  console.log(user);
 const counter=(item?.counter);
 
   const ConfigPriceOverview = [
@@ -26,14 +30,14 @@ const counter=(item?.counter);
     {
       title: "This Month",
       icon: FiShoppingCart,
-      price: counter?.thisMonthTotalOrderAmount || 0,
+      price: (user?.staff_role === "HR" ? counter?.thisMonthTotalOrderAmount : 0) ||  0,
       order: counter?.thisMonthTotalOrder || 0,
       style: "bg-blue-500",
     },
     {
       title: "All-Time Sales",
       icon: ImCreditCard,
-      price: counter?.totalOrderAmount || 0,
+      price: (user?.staff_role === "HR" ? counter?.totalOrderAmount : 0) || 0,
       order: counter?.totalOrder || 0,
       style: "bg-green-500",
     },

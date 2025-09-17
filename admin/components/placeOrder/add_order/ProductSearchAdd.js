@@ -31,44 +31,61 @@ export default function ProductSearchAddWithCreate() {
   const dq = useDebounce(q.trim().toLowerCase(), DEBOUNCE_MS);
 
   useEffect(() => {
-    let alive = true;
+  let alive = true;
 
-    async function run() {
-      setError("");
-      setResults([]);
-      if (!dq || dq.length < 2) return;
-      setLoading(true);
-      try {
-        const snap = await db
-          .collection("products")
-          .orderBy("title_lower")
-          .startAt(dq)
-          .endAt(dq + "\uf8ff")
-          .limit(MAX_RESULTS)
-          .get();
+  async function run() {
+    setError("");
+    setResults([]);
+    if (!dq || dq.length < 2) return;
 
-        if (!alive) return;
+    setLoading(true);
+    try {
+      // 1) title prefix
+      const titleQ = db
+        .collection("products")
+        .orderBy("title_lower")
+        .startAt(dq)
+        .endAt(dq + "\uf8ff")
+        .limit(MAX_RESULTS);
 
-        const rows = snap.docs.map((d) => {
-          const data = d.data();
-          return { id: d.id, ...data };
-        });
+      // 2) sku prefix (lower-cased field preferred)
+      const skuQ = db
+        .collection("products")
+        .orderBy("single_sku ")
+        .startAt(dq)
+        .endAt(dq + "\uf8ff")
+        .limit(MAX_RESULTS);
 
-        setResults(rows);
-      } catch (e) {
-        if (!alive) return;
-        console.error("Product search error:", e);
-        setError("Failed to search. Ensure products.title_lower exists.");
-      } finally {
-        if (alive) setLoading(false);
-      }
+      // parallel fetch
+      const [titleSnap, skuSnap] = await Promise.all([titleQ.get(), skuQ.get()]);
+      if (!alive) return;
+
+      // merge unique by id
+      const m = new Map();
+      titleSnap.docs.forEach(d => m.set(d.id, { id: d.id, ...d.data() }));
+      skuSnap.docs.forEach(d => m.set(d.id, { id: d.id, ...d.data() }));
+
+      // sort (title_lower -> single_sku)
+      const rows = Array.from(m.values()).sort((a, b) => {
+        const tA = (a.title_lower || "").localeCompare(b.title_lower || "");
+        if (tA !== 0) return tA;
+        return (a.single_sku || "").localeCompare(b.single_sku || "");
+      });
+
+      setResults(rows.slice(0, MAX_RESULTS));
+    } catch (e) {
+      if (!alive) return;
+      console.error("Product search error:", e);
+      setError("Failed to search. Ensure indexes for title_lower & single_sku_lower.");
+    } finally {
+      if (alive) setLoading(false);
     }
+  }
 
-    run();
-    return () => {
-      alive = false;
-    };
-  }, [dq]);
+  run();
+  return () => { alive = false; };
+}, [dq]);
+
 
   function addItemFromProduct(p) {
     let variant = null;

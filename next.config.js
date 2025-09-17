@@ -10,7 +10,7 @@ const nextConfig = {
   // },
 
   env: {
-    APP_TITLE: "Jannat Fashion",
+     APP_TITLE: "Jannat Fashion",
     INVOICE_PREFIX: "JF0",
     SEARCH_PREFIX: "JF011",
     SENDER_HOTLINE: "09647-323700",

@@ -50,15 +50,15 @@ function generateBulkPrintStickers(invoiceArray) {
         : "";
       const title = opt ? `${it.title} (${opt})` : it.title;
       const qty = Number(it?.quantity || 0);
-      const price = Number(it?.price || 0);
-      const total = Number(it?.line_total ?? qty * price);
+      // const price = Number(it?.price || 0);
+      // const total = Number(it?.line_total ?? qty * price);
       // const title = String(it?.title || "");
       return [
         i + 1,
         title,
         qty > 0 ? `${qty} ${it?.unit || ""}`.trim() : "",
-        formatMoney(price),
-        formatMoney(total),
+        // formatMoney(price),
+        // formatMoney(total),
       ];
     });
 
@@ -85,7 +85,8 @@ function generateBulkPrintStickers(invoiceArray) {
 
         // 🔥 গ্লোবাল সেল স্টাইল
         styles: {
-          fontSize: 14,
+          fontSize: 22,
+          fontStyle: "bold",
           cellPadding: 2,
           textColor: [0, 0, 0], // টেক্সট কালো
           lineColor: [0, 0, 0], // সেলের বর্ডার কালো
@@ -103,9 +104,9 @@ function generateBulkPrintStickers(invoiceArray) {
         columnStyles: {
           0: { cellWidth: 10, halign: "center" }, // #
           1: { cellWidth: "auto" }, // Item
-          2: { cellWidth: 16, halign: "center" }, // Qty
-          3: { cellWidth: 26, halign: "right" }, // Price
-          4: { cellWidth: 30, halign: "right" }, // Total
+          2: { cellWidth: 26, halign: "center" }, // Qty
+          // 3: { cellWidth: 26, halign: "right" }, // Price
+          // 4: { cellWidth: 30, halign: "right" }, // Total
         },
 
         // (ঐচ্ছিক) একদম নিশ্চিত করতে:
@@ -117,7 +118,7 @@ function generateBulkPrintStickers(invoiceArray) {
       });
     } else {
       // কোন আইটেম না থাকলে ছোটো একটা নোট
-      doc.setFontSize(14);
+      doc.setFontSize(22);
       doc.text("No items", 16, startY + 6);
     }
 
@@ -146,7 +147,11 @@ function generateBulkPrintStickers(invoiceArray) {
       const x = (pageWidth - textWidth) / 2;
       doc.text(text, x, y);
     };
-    centerText(`${item?.fulfillment?.courier}(#${item?.fulfillment?.consignment_id})`, 74, 30)
+    centerText(
+      `${item?.fulfillment?.courier}(#${item?.fulfillment?.consignment_id})`,
+      74,
+      30
+    );
     centerText(`Address: ${address}`, 259, 28);
     centerText(`Hotline: +88 ${hotline}`, 247, 28);
     doc.setFont(undefined, "bold");
@@ -212,7 +217,6 @@ function generateBulkPrintStickers(invoiceArray) {
 
   // ⚠️ খুব তাড়াতাড়ি revoke করলে নতুন ট্যাব লোড হতে নাও পারে। একটু দেরিতে revoke করুন:
   setTimeout(() => URL.revokeObjectURL(url), 60000); // 60s পরে নিরাপদে রিভোক
-
 }
 
 export default generateBulkPrintStickers;

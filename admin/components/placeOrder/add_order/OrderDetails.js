@@ -417,14 +417,14 @@ const OrderDetailsFormUp = () => {
             <span>Name</span>
             <FormInput name="customer.name" placeholder="Mr. Customer" />
           </div>
-          <div className="col-span-2 sm:col-span-1">
+          {/* <div className="col-span-2 sm:col-span-1">
             <span>Marketing Opt-in</span>
             <FormDropdown
               name="customer.marketing_opt_in"
               items={YES_NO}
               placeholder="No"
             />
-          </div>
+          </div> */}
         </div>
       </div>
       {/* ADDRESSES (with overlay) */}
@@ -676,7 +676,7 @@ const AddressFields = ({ prefix }) => {
         <span>State / District</span>
         <FormInput name={`${prefix}.state`} placeholder="Dhaka" />
       </div>
-      <div className="col-span-1">
+      {/* <div className="col-span-1">
         <span>Country</span>
         <FormInput
           name={`${prefix}.country`}
@@ -684,7 +684,7 @@ const AddressFields = ({ prefix }) => {
           disabled
           placeholder=""
         />
-      </div>
+      </div> */}
     </div>
   );
 };
